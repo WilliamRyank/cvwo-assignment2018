@@ -1,16 +1,29 @@
 <h1>List of all Tasks</h1>
 
-<% @tasks.each do |task| %>
-<div>
-  <p>
-    Task: <%= task.task %>
-  </p>
-  <p>
-    Description: <%= task.description %>
-  </p>
-  <%= link_to "Edit", edit_task_path(task) %>
-  <%= link_to "Delete", task_path(task), method: :delete %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 col-md-offset-1">
+      <div class="add-btn">
+        <%= link_to "Add Task", new_task_path, class: "add-btn-txt" %>
+      </div>
+    </div>
+  </div>
+  <hr class="style18">
+  <% @tasks.each do |task| %>
+  <div class="row">
+    <div class="col-md-7 col-md-offset-1">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+      <%= task.task %>
+    </div>
+    <div class="col-md-1">
+      <%= link_to "Edit", edit_task_path(task), class: "button edit" %>
+    </div>
+    <div class="col-md-1">
+      <%= link_to "Delete", task_path(task), method: :delete, class: "button delete" %>
+    </div>
+    <div class="col-md-1">
+      30 May
+    </div>
+  </div>
+  <% end %>
 </div>
-<% end %>
-<br>
-<%= link_to "Add new task", new_task_path %>
