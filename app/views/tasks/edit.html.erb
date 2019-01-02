@@ -2,12 +2,12 @@
 
 <%= form_for @task do |f| %>
   <p>
-    <%= f.label :task %><br>
-    <%= f.text_field :task %>
+    <%= f.label :task_name %><br>
+    <%= f.text_field :task_name %>
   </p>
   <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.label :task_description %><br>
+    <%= f.text_area :task_description %>
   </p>
   <%= link_to "Back", task_path(@task) %>
   <%= f.submit "Edit task" %>

@@ -3,11 +3,15 @@
 <%= form_for @task do |f| %>
   <p>
     <%= f.label :task %><br>
-    <%= f.text_field :task %>
+    <%= f.text_field :task_name %>
   </p>
   <p>
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :task_description %>
+  </p>
+  <p>
+    <%= f.label :due %><br>
+    <%= date_select :task, :task_due %>
   </p>
   <%= f.submit "Add new task" %>
 <% end %>
