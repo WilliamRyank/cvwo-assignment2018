@@ -1,29 +1,40 @@
-<h1>List of all Tasks</h1>
+<h1 class="heading">List of all Tasks</h1>
 
 <div class="container">
-  <div class="row">
-    <div class="col-xs-3 col-xs-offset-1">
-      <div class="add-btn">
-        <%= link_to "Add Task", new_task_path, class: "add-btn-txt" %>
+  <div class="container-box">
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-1">
+        <div class="add-btn">
+          <%= link_to "Add Task", new_task_path, class: "add-btn-txt" %>
+        </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
+        <hr class="style18">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-1">
+        <h4>Category 1</h4>
+      </div>
+    </div>
+    <% @tasks.each do |task| %>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-1">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        <%= task.task_name %>
+      </div>
+      <div class="col-xs-2">
+        <%= link_to "Edit", edit_task_path(task), class: "button edit" %>
+      </div>
+      <div class="col-xs-2">
+        <%= link_to "Delete", task_path(task), method: :delete, class: "button delete" %>
+      </div>
+      <div class="col-xs-2">
+        <%= task.task_due.strftime("%B %d, %Y") %>
+      </div>
+    </div>
+    <% end %>
   </div>
-  <hr class="style18">
-  <% @tasks.each do |task| %>
-  <div class="row">
-    <div class="col-xs-4 col-xs-offset-1">
-      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-      <%= task.task_name %>
-    </div>
-    <div class="col-xs-2">
-      <%= link_to "Edit", edit_task_path(task), class: "button edit" %>
-    </div>
-    <div class="col-xs-2">
-      <%= link_to "Delete", task_path(task), method: :delete, class: "button delete" %>
-    </div>
-    <div class="col-xs-2">
-      <%= task.task_due.strftime("%B %d, %Y") %>
-    </div>
-  </div>
-  <% end %>
 </div>

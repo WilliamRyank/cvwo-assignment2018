@@ -1,14 +1,29 @@
-<h1>Edit task</h1>
+<h1 class="heading">Edit task</h1>
 
 <%= form_for @task do |f| %>
-  <p>
-    <%= f.label :task_name %><br>
-    <%= f.text_field :task_name %>
-  </p>
-  <p>
-    <%= f.label :task_description %><br>
-    <%= f.text_area :task_description %>
-  </p>
-  <%= link_to "Back", task_path(@task) %>
-  <%= f.submit "Edit task" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <div class="form-group">
+        <%= f.label :task_name, "Task Name" %><br>
+        <%= f.text_field :task_name, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter New Task"%>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <div class="form-group">
+          <%= f.label :task_description, "Task Description" %><br>
+          <%= f.text_field :task_description, class: "form-control", id: "exampleInputEmail1", placeholder: "Add Task Description"%>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <%= f.label :task_due, "Task Due" %><br>
+            <%= date_select :task, :task_due %><br>
+            <%= f.submit "Edit Task", class:"submit-btn btn-primary btn" %>
+            <% end %>
+        </div>
+      </div>
+</div>
