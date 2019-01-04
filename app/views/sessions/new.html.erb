@@ -1,0 +1,27 @@
+<h1 class="heading">Sign In</h1>
+
+<%= form_for :session, url: signin_path do |f| %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <div class="form-group">
+        <%= f.label :username, "Username" %><br>
+        <%= f.text_field :username, class: "form-control", id: "exampleInputEmail1", placeholder: "Enter your username"%>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <div class="form-group">
+          <%= f.label :password, "Password" %><br>
+          <%= f.password_field :password, class: "form-control", id: "exampleInputEmail1", autocomplete: "off" %>
+        </div>
+      </div>
+    </div>
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <%= f.submit "Sign In", class:"submit-btn btn-primary btn" %>
+            <% end %>
+        </div>
+      </div>
+</div>
