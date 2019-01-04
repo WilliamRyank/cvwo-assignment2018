@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_062115) do
+ActiveRecord::Schema.define(version: 2019_01_04_063351) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "task_name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_01_04_062115) do
 
   create_table "users", force: :cascade do |t|
     t.string "username"
+    t.string "password_digest"
   end
 
 end
