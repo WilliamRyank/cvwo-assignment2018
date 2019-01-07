@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :require_user
 
   def index
     @tasks = Task.all
@@ -10,8 +11,9 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.user_id = session[:user_id]
     if @task.save
-      flash[:notice] = "Successfully added new task"
+      flash[:success] = "Successfully added new task"
       redirect_to tasks_path
     else
       render 'new'
@@ -29,7 +31,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      flash[:notice] = "Successfully edited new task"
+      flash[:success] = "Successfully edited new task"
       redirect_to task_path(@task)
     else
       render 'new'
@@ -39,7 +41,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     if @task.destroy
-      flash[:notice] = "Task was successfully destroyed"
+      flash[:danger] = "Task was successfully destroyed"
       redirect_to tasks_path
     else
       render "tasks"

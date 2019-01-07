@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
 
   def new
-
+    if logged_in?
+      redirect_to tasks_path
+    end
   end
 
   def create
@@ -18,7 +20,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    flash[:notice] = "You have logged out"
+    flash[:success] = "You have logged out"
     redirect_to root_path
   end
 
