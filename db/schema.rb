@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_04_063351) do
+ActiveRecord::Schema.define(version: 2019_01_08_123120) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string "task_name"
     t.string "task_description"
     t.date "task_due"
     t.integer "user_id"
+    t.integer "category_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -31,6 +31,9 @@
           <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
           <%= task.task_name %>
         </div>
+        <div class="col-xs-1">
+          <%= Category.find_by(id: task.category_id).name %>
+        </div>
         <div class="col-xs-2">
           <%= link_to "Edit", edit_task_path(task), class: "btn btn-primary" %>
         </div>

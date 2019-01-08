@@ -12,11 +12,28 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.user_id = session[:user_id]
-    if @task.save
-      flash[:success] = "Successfully added new task"
-      redirect_to tasks_path
+    category = Category.find_by(name: params[:task][:category])
+    if  category != nil
+      @task.category_id = category.id
+      if @task.save
+        flash[:success] = "Successfully added new task"
+        redirect_to tasks_path
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      category = Category.new(name: params[:task][:category])
+      if category.save
+        @task.category_id = category.id
+        if @task.save
+          flash[:success] = "Successfully added new task"
+          redirect_to tasks_path
+        else
+          render 'new'
+        end
+      else
+        render 'new'
+      end
     end
   end
 
