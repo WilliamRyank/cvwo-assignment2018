@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all
+    @categories = Category.all
   end
 
   def new
@@ -13,7 +14,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user_id = session[:user_id]
     category = Category.find_by(name: params[:task][:category])
-    if  category != nil
+    if category != nil
       @task.category_id = category.id
       if @task.save
         flash[:success] = "Successfully added new task"
@@ -58,7 +59,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     if @task.destroy
-      flash[:danger] = "Task was successfully destroyed"
+      flash[:success] = "Task was successfully destroyed"
       redirect_to tasks_path
     else
       render "tasks"

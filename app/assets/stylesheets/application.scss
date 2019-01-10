@@ -14,14 +14,15 @@
 @import "bootstrap";
 
 body{
-  background-color: #d1d9e0;
+  background: url("https://hdqwalls.com/download/dark-night-landscape-artistic-7v-2048x1152.jpg") no-repeat center center fixed;
+  color: black;
 }
 
 .container-box {
   border-radius: 7px;
   background: white;
   box-shadow: 0px 0px 10px 10px;
-  height: 100vh;
+  height: 100%;
   padding-top: 40px;
 }
 
@@ -63,8 +64,9 @@ hr.style18:before {
   border-width: 0 0 1px 0;
   border-radius: 20px;
 }
-h4  {
+.category  {
   text-decoration: underline;
+  color: black
 }
 
 select {
@@ -78,4 +80,35 @@ select {
 }
 .logout-btn {
   text-align: right;
+}
+
+.landing {
+	text-align: center;
+	z-index: 1;
+	position: relative;
+	top: 35vh;
+	color: white;
+}
+.landing h1 {
+	font-size: 3em;
+	font-family: 'Merienda', cursive;
+}
+.landing p {
+	font-size: 1.5em;
+	font-family: 'Shadows Into Light', cursive;
+	letter-spacing: 2px;
+	margin-bottom: 15px;
+}
+.landing .labs{
+	color:#15C515;
+}
+.landing-btn {
+  margin: 0px 15px;
+  letter-spacing: 1px;
+}
+h1,h2,h3,h4,h5,h6 {
+  color: white;
+}
+a:hover {
+  text-decoration: none;
 }
