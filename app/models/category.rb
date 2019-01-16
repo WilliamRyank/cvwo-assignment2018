@@ -1,10 +1,11 @@
 class Category < ApplicationRecord
   has_many :tasks
-  before_save :capitalize
-  validates :name, uniqueness: {case_sensitive: false}
+  before_save :titleize
 
-  def capitalize
-    self.name = name.capitalize
+  validates :name, presence: true, length: {minimum: 4}
+
+  def titleize
+    self.name = name.titleize
   end
-  
+
 end

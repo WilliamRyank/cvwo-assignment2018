@@ -18,11 +18,19 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <div class="form-group">
+          <%= f.label :category, "Category" %><br>
+          <%= f.text_field :category, class: "form-control", value: "#{@task.category.name}", text: @task.category.name, placeholder: "Choose category"%>
+        </div>
+      </div>
+    </div>
       <div class="row">
         <div class="col-xs-4 col-xs-offset-4">
             <%= f.label :task_due, "Task Due" %><br>
             <%= date_select :task, :task_due %><br>
-            <%= f.submit "Edit Task", class:"submit-btn btn-primary btn" %>
+            <%= f.submit "Edit Task", class:"btn-primary btn" %>
             <% end %>
         </div>
       </div>

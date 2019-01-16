@@ -1,0 +1,21 @@
+<% if @task.errors.any? || @category.errors.any? %>
+  <div class="container">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div class="alert alert-danger" role="alert">
+        <a href="#" class="close" data-dismiss="alert">×</a>
+        <ul>
+          <% @task.errors.full_messages.each do |msg| %>
+            <li>
+              <%= msg %>
+            </li>
+          <% end %>
+          <% @category.errors.full_messages.each do |msg| %>
+            <li>
+              <%= msg.sub! "Name", "Category" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>

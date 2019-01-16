@@ -1,5 +1,5 @@
 .row {
-  margin-bottom: 20px;
+  margin: 15px;
 }
 .glyphicon-ok {
   border: 1px solid;
@@ -65,8 +65,8 @@ hr.style18:before {
   border-radius: 20px;
 }
 .category  {
-  text-decoration: underline;
-  color: black
+  font-family: 'Open Sans', sans-serif;
+  color: black;
 }
 
 select {
@@ -111,4 +111,9 @@ h1,h2,h3,h4,h5,h6 {
 }
 a:hover {
   text-decoration: none;
+}
+a.task{
+  font-family: 'PT Sans', sans-serif;
+  font-size: 18px;
+  color: black;
 }

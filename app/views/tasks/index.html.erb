@@ -4,9 +4,7 @@
   <div class="container-box">
     <div class="row">
       <div class="col-xs-4 col-xs-offset-1">
-        <div class="add-btn">
-          <%= link_to "Add Task", new_task_path, class: "btn btn-success" %>
-        </div>
+        <%= link_to "Add Task", new_task_path, class: "btn btn-success" %>
       </div>
       <div class="col-xs-2 col-xs-offset-3 logout-btn">
         <div class="add-btn">
@@ -21,31 +19,33 @@
     </div>
     <% @categories.each do |cat| %>
       <div class="row">
-        <div class="col-xs-4 col-xs-offset-1">
-          <% if cat.tasks.length > 0 %>
+        <div class="col-xs-11 col-xs-offset-1">
           <h4 class="category"><%= cat.name %></h4>
-          <% end %>
         </div>
       </div>
-      <% @tasks.each do |task| %>
-      <% if logged_in? && current_user == task.user && task.category_id == cat.id %>
-        <div class="row">
-          <div class="col-xs-4 col-xs-offset-1">
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            <%= link_to "#{task.task_name}", task_path(task)%>
-          </div>
-          <div class="col-xs-2">
-            <%= link_to "Edit", edit_task_path(task), class: "btn btn-primary" %>
-          </div>
-          <div class="col-xs-2">
-            <%= link_to "Delete", task_path(task), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
-          </div>
-          <div class="col-xs-2">
-            <%= task.task_due.strftime("%B %d, %Y") %>
-          </div>
-        </div>
-      <% end %>
-      <% end %>
+      <ul>
+        <% @tasks.each do |task| %>
+          <% if task.category_id == cat.id %>
+          <li>
+            <div class="row">
+              <div class="col-sm-4 col-sm-offset-1">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                <%= link_to "#{task.task_name}", task_path(task), class: "task"%>
+              </div>
+              <div class="col-sm-1 col-sm-offset-1">
+                <%= link_to "Edit", edit_task_path(task), class: "btn btn-primary btn-block" %>
+              </div>
+              <div class="col-sm-1">
+                <%= link_to "Delete", task_path(task), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-block" %>
+              </div>
+              <div class="col-sm-3 col-sm-offset-1">
+                <%= task.task_due.strftime("%B %d, %Y") %>
+              </div>
+            </div>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
     <% end %>
   </div>
 </div>
