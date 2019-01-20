@@ -58,11 +58,11 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    if @task.destroy
-      flash[:success] = "Task was successfully destroyed"
-      redirect_to tasks_path
-    else
-      render 'tasks'
+    @task.destroy
+    respond_to  do |format|
+      format.html { redirect_to tasks_path, notice: "Task was successfully destroyed" }
+      format.json { head :no_content}
+      format.js { flash.now[:success] = "Task was successfully destroyed" }
     end
   end
 
