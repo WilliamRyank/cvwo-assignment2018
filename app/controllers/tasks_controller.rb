@@ -1,15 +1,12 @@
 class TasksController < ApplicationController
   before_action :require_user
   before_action :set_task, only: [:show, :edit, :destroy, :update]
+  before_action :get_users_and_categories, only: [:index, :indexdate]
 
   def index
-    @tasks = @current_user.tasks.all.order("task_due")
-    @categories = @current_user.categories.all.uniq{|cat| cat.name }
   end
 
   def indexdate
-    @tasks = @current_user.tasks.all.order("task_due")
-    @categories = @current_user.categories.all.uniq{|cat| cat.name }
   end
 
   def new
@@ -74,7 +71,7 @@ class TasksController < ApplicationController
 
   private
     def task_params
-      params.require(:task).permit(:task_name, :task_description, :task_due)
+      params.require(:task).permit(:task_name, :task_description, :task_due, :category_name)
     end
 
     def set_task
@@ -105,5 +102,10 @@ class TasksController < ApplicationController
 
     def create_category
       @category = Category.new(name: params[:task][:category])
+    end
+
+    def get_users_and_categories
+      @tasks = @current_user.tasks.all.order("task_due")
+      @categories = @current_user.categories.all.order("name").uniq{|cat| cat.name }
     end
 end
