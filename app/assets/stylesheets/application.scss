@@ -13,9 +13,11 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
 body{
   background: url("https://hdqwalls.com/download/dark-night-landscape-artistic-7v-2048x1152.jpg") no-repeat center center fixed;
   color: black;
+  font-family: 'Inconsolata', monospace;
 }
 
 .container-box {
@@ -48,7 +50,7 @@ body{
   letter-spacing: 1px;
 }
 hr.style18 {
-  height: 30px;
+  height: 20px;
   border-style: solid;
   border-color: #8c8b8b;
   border-width: 1px 0 0 0;
@@ -57,7 +59,7 @@ hr.style18 {
 hr.style18:before {
   display: block;
   content: "";
-  height: 30px;
+  height: 20px;
   margin-top: -31px;
   border-style: solid;
   border-color: #8c8b8b;
@@ -70,7 +72,7 @@ hr.style18:before {
 }
 
 select {
-  width: 32%;
+  width: 30%;
 }
 .alert {
   margin-top: 20px;
@@ -113,7 +115,9 @@ a:hover {
   text-decoration: none;
 }
 a.task{
-  font-family: 'PT Sans', sans-serif;
   font-size: 18px;
   color: black;
+}
+.submit-btn{
+  margin-top: 10px;
 }

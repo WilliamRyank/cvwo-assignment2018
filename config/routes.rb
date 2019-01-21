@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 #home page
 root "welcome#home"
 #routes for tasks
+get "tasks/date", to: "tasks#indexdate"
 resources :tasks
+
+
 get "signup", to: "users#new"
 resources :users, except: [:new]
 

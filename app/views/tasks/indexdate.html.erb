@@ -7,7 +7,7 @@
         <%= link_to "Add Task", new_task_path, class: "btn btn-success" %>
       </div>
       <div class="col-xs-3">
-        <%= link_to "Sort By Date", tasks_date_path, class: "btn btn-warning" %>
+        <%= link_to "Sort By Category", tasks_path, class: "btn btn-warning" %>
       </div>
       <div class="col-xs-2 logout-btn">
         <div class="add-btn">
@@ -22,15 +22,10 @@
       </div>
     </div>
 
-    <% @categories.each do |cat| %>
-      <div class="row">
-        <div class="col-xs-11 col-xs-offset-1">
-          <h3 class="category"><%= cat.name %></h3>
-        </div>
-      </div>
+
       <ul>
         <% @tasks.each do |task| %>
-          <% if task.category_id == cat.id %>
+
           <li>
             <div class="row" id="task_<%= task.id %>">
               <div class="col-sm-4 col-sm-offset-1">
@@ -48,8 +43,8 @@
             </div>
           </li>
           <% end %>
-        <% end %>
+
       </ul>
-    <% end %>
+
   </div>
 </div>
