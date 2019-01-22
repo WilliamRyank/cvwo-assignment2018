@@ -1,15 +1,51 @@
 <h1 class="heading">List of all Tasks</h1>
 
+
 <div class="container">
   <div class="container-box">
     <div class="row">
       <div class="col-xs-2 col-xs-offset-1">
-        <%= link_to "Add Task", new_task_path, class: "btn btn-success" %>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mynewpost">
+          Add Task
+        </button>
+        <%= form_for @task do |f| %>
+        <div class="modal fade" id="mynewpost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Title</h3>
+              </div>
+              <div class="modal-body">
+                <div class="field">
+                  <%= f.label :task_name, "Task Name" %><br>
+                  <%= f.text_field :task_name, class: "form-control submit-form task_name", placeholder: "Enter New Task"%>
+                </div>
+                <div class="field">
+                  <%= f.label :task_description, "Task Description" %><br>
+                  <%= f.text_field :task_description, class: "form-control submit-form task_description",  placeholder: "Add Task Description"%>
+                </div>
+                <div class="field">
+                  <%= f.label :category, "Category" %><br>
+                  <%= f.text_field :category, class: "form-control submit-form task_category", value: "", placeholder: "Choose category"%>
+                </div>
+                <div class="field">
+                  <%= f.label :task_due, "Task Due" %><br>
+                  <%= date_select :task, :task_due %><br>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <%= f.submit "Add Task", class:"btn-success btn submit-btn" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
       </div>
-      <div class="col-xs-4 col-xs-offset-1 sort-btn">
+      <div class="col-xs-3 col-xs-offset-1" id="sort-btn">
         <%= link_to "Sort By Date", tasks_date_path, class: "btn btn-warning" %>
       </div>
-      <div class="col-xs-2 logout-btn">
+      <div class="col-xs-2 col-xs-offset-1 logout-btn">
         <div class="add-btn">
           <%= link_to "Log Out", logout_path, method: :delete, class: "btn btn-info" %>
         </div>
@@ -21,7 +57,6 @@
         <small>Click on the task name to see more details</small>
       </div>
     </div>
-
     <% @categories.each do |cat| %>
       <div class="row">
         <div class="col-xs-11 col-xs-offset-1">
@@ -34,10 +69,45 @@
           <li>
             <div class="row" id="task_<%= task.id %>">
               <div class="col-sm-4 col-sm-offset-1">
-                  <%= link_to "#{task.task_name}", task_path(task), class: "task" %>
-                </div>
+                <%= link_to "#{task.task_name}", task_path(task), class: "task" %>
+              </div>
               <div class="col-sm-2 ">
-                <%= link_to "Edit", edit_task_path(task), class: "btn btn-primary" %>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-task">
+                  Edit Task
+                </button>
+                <%= form_for task do |f| %>
+                <div class="modal fade" id="edit-task" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Title</h3>
+                      </div>
+                      <div class="modal-body">
+                        <div class="field">
+                          <%= f.label :task_name, "Task Name" %><br>
+                          <%= f.text_field :task_name, class: "form-control submit-form task_name", placeholder: "Enter New Task"%>
+                        </div>
+                        <div class="field">
+                          <%= f.label :task_description, "Task Description" %><br>
+                          <%= f.text_field :task_description,value: "#{task.task_description}", class: "form-control submit-form task_description",  placeholder: "Add Task Description"%>
+                        </div>
+                        <div class="field">
+                          <%= f.label :category, "Category" %><br>
+                          <%= f.text_field :category, class: "form-control submit-form task_category", value: "#{task.category.name}", placeholder: "Choose category"%>
+                        </div>
+                        <div class="field">
+                          <%= f.label :task_due, "Task Due" %><br>
+                          <%= date_select :task, :task_due, default: { day: task.task_due.day, month: task.task_due.month, year: task.task_due.year } %><br>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <%= f.submit "Edit Task", class:"btn-primary btn" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
               </div>
               <div class="col-sm-2">
                 <%= link_to "Delete", task_path(task),remote: true, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger " %>

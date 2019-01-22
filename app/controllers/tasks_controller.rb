@@ -4,9 +4,11 @@ class TasksController < ApplicationController
   before_action :get_users_and_categories, only: [:index, :indexdate]
 
   def index
+    @task = Task.new
   end
 
   def indexdate
+    @task = Task.new
   end
 
   def new
@@ -18,16 +20,25 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user_id = session[:user_id]
     find_category
-    # if block is when the category exist in database
     if @category != nil
       @task.category_id = @category.id
-      save_task
+      if @task.save
+        flash[:success] = "Successfully added new task"
+        redirect_to tasks_path
+      else
+        render 'new'
+      end
     # else block if category does not exist in database, hence must create new category
     else
       create_category
       if @category.save
         @task.category_id = @category.id
-        save_task
+        if @task.save
+          flash[:success] = "Successfully added new task"
+          redirect_to tasks_path
+        else
+          render 'new'
+        end
       else
         render 'new'
       end

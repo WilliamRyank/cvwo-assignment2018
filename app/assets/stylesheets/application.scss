@@ -72,7 +72,7 @@ hr.style18:before {
 }
 
 select {
-  width: 30%;
+  width: 14%;
 }
 .alert {
   margin-top: 20px;
@@ -118,10 +118,7 @@ a.task{
   font-size: 18px;
   color: black;
 }
-.submit-btn{
-  margin-top: 10px;
-}
-.sort-btn {
+#sort-btn {
   text-align: center;
 }
 .submit-form{
@@ -129,4 +126,14 @@ a.task{
 }
 label{
   color: white;
+}
+.modal-content{
+  background-color: black;
+  text-align: center;
+}
+.form-control{
+  width: 50%
+}
+input{
+  margin: auto;
 }
