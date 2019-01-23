@@ -1,3 +1,4 @@
+
 <h1 class="heading">List of all Tasks</h1>
 
 
@@ -13,12 +14,12 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Title</h3>
+                <h3 class="modal-title" id="exampleModalLabel">Add New Task</h3>
               </div>
               <div class="modal-body">
                 <div class="field">
                   <%= f.label :task_name, "Task Name" %><br>
-                  <%= f.text_field :task_name, class: "form-control submit-form task_name", placeholder: "Enter New Task"%>
+                  <%= f.text_field :task_name, class: "form-control submit-form task_name", placeholder: "Enter New Task - maximum 25 letters"%>
                 </div>
                 <div class="field">
                   <%= f.label :task_description, "Task Description" %><br>
@@ -26,7 +27,7 @@
                 </div>
                 <div class="field">
                   <%= f.label :category, "Category" %><br>
-                  <%= f.text_field :category, class: "form-control submit-form task_category", value: "", placeholder: "Choose category"%>
+                  <%= f.text_field :category, class: "form-control submit-form task_category", value: "", placeholder: "Choose category - must be presence"%>
                 </div>
                 <div class="field">
                   <%= f.label :task_due, "Task Due" %><br>
@@ -53,14 +54,15 @@
     </div>
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1">
-        <hr class="style18">
+        <hr>
         <small>Click on the task name to see more details</small>
       </div>
     </div>
     <% @categories.each do |cat| %>
       <div class="row">
-        <div class="col-xs-11 col-xs-offset-1">
+        <div class="col-xs-10 col-xs-offset-1">
           <h3 class="category"><%= cat.name %></h3>
+          <hr>
         </div>
       </div>
       <ul>
@@ -80,7 +82,7 @@
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Title</h3>
+                        <h3 class="modal-title" id="exampleModalLabel">Edit Task</h3>
                       </div>
                       <div class="modal-body">
                         <div class="field">

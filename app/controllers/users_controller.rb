@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       end
     else
       flash[:danger] = "Your password does not match"
-      render 'new'
+      render "new"
     end
   end
 

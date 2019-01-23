@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :require_user
   before_action :set_task, only: [:show, :edit, :destroy, :update]
   before_action :get_users_and_categories, only: [:index, :indexdate]
+  before_action :get_months, only: [:indexdate]
 
   def index
     @task = Task.new
@@ -12,8 +13,6 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
-    @category = Category.new
   end
 
   def create
@@ -26,7 +25,8 @@ class TasksController < ApplicationController
         flash[:success] = "Successfully added new task"
         redirect_to tasks_path
       else
-        render 'new'
+        flash[:danger] = "Error adding new task"
+        redirect_to tasks_path
       end
     # else block if category does not exist in database, hence must create new category
     else
@@ -37,10 +37,12 @@ class TasksController < ApplicationController
           flash[:success] = "Successfully added new task"
           redirect_to tasks_path
         else
-          render 'new'
+          flash[:danger] = "Error adding new task"
+          redirect_to tasks_path
         end
       else
-        render 'new'
+        flash[:danger] = "Error adding new task"
+        redirect_to tasks_path
       end
     end
   end
@@ -65,7 +67,8 @@ class TasksController < ApplicationController
         @task.category_id = @category.id
         update_task
       else
-        render 'new'
+        flash[:danger] = "Error updating task"
+        redirect_to tasks_path
       end
     end
   end
@@ -94,7 +97,8 @@ class TasksController < ApplicationController
         flash[:success] = "Successfully updated task"
         redirect_to tasks_path
       else
-        render 'new'
+        flash[:danger] = "Error updating task"
+        redirect_to tasks_path
       end
     end
 
@@ -103,7 +107,8 @@ class TasksController < ApplicationController
         flash[:success] = "Successfully added new task"
         redirect_to tasks_path
       else
-        render 'new'
+        flash[:danger] = "Error adding new task"
+        redirect_to tasks_path
       end
     end
 
@@ -118,5 +123,9 @@ class TasksController < ApplicationController
     def get_users_and_categories
       @tasks = @current_user.tasks.all.order("task_due")
       @categories = @current_user.categories.all.order("name").uniq{|cat| cat.name }
+    end
+
+    def get_months
+      @months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     end
 end
