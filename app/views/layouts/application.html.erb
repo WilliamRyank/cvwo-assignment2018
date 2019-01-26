@@ -4,7 +4,7 @@
     <title>Cvwo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -12,7 +12,7 @@
   <body>
     <%= render "layouts/messages" %>
     <%= yield %>
-    <script>
+    <script type="text/javascript">
         $(".new-btn").on("click", function(){
           $(".task_name").val("");
           $(".task_description").val("");
