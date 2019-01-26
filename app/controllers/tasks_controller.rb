@@ -25,7 +25,7 @@ class TasksController < ApplicationController
         flash[:success] = "Successfully added new task"
         redirect_to tasks_path
       else
-        flash[:danger] = "Error adding new task"
+        flash[:danger] = "Error adding new task. Please ensure you have input the task name(max. 25 characters) and category"
         redirect_to tasks_path
       end
     # else block if category does not exist in database, hence must create new category
@@ -37,11 +37,11 @@ class TasksController < ApplicationController
           flash[:success] = "Successfully added new task"
           redirect_to tasks_path
         else
-          flash[:danger] = "Error adding new task"
+          flash[:danger] = "Error adding new task. Please ensure you have input the task name(max. 25 characters) and category"
           redirect_to tasks_path
         end
       else
-        flash[:danger] = "Error adding new task"
+        flash[:danger] = "Error adding new task. Please ensure category name is present."
         redirect_to tasks_path
       end
     end
@@ -67,7 +67,7 @@ class TasksController < ApplicationController
         @task.category_id = @category.id
         update_task
       else
-        flash[:danger] = "Error updating task"
+        flash[:danger] = "Error updating task. Please ensure category name is present"
         redirect_to tasks_path
       end
     end
@@ -97,7 +97,7 @@ class TasksController < ApplicationController
         flash[:success] = "Successfully updated task"
         redirect_to tasks_path
       else
-        flash[:danger] = "Error updating task"
+        flash[:danger] = "Error updating task. Please ensure you have input the task name(max. 25 characters) and category"
         redirect_to tasks_path
       end
     end
@@ -107,7 +107,7 @@ class TasksController < ApplicationController
         flash[:success] = "Successfully added new task"
         redirect_to tasks_path
       else
-        flash[:danger] = "Error adding new task"
+        flash[:danger] = "Error adding new task. Please ensure you have input the task name(max. 25 characters) and category"
         redirect_to tasks_path
       end
     end

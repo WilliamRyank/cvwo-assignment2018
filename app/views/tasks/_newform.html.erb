@@ -1,0 +1,46 @@
+<h1 class="heading">List of all Tasks</h1>
+
+
+<div class="container">
+  <div class="container-box">
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-1">
+        <button type="button" class="btn btn-success new-btn" data-toggle="modal" data-target="#newModal">
+          Add Task
+        </button>
+        <!-- Add Form Modal -->
+        <%= form_for @task do |f| %>
+        <div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Add New Task</h3>
+              </div>
+              <div class="modal-body">
+                <div class="field">
+                  <%= f.label :task_name, "Task Name" %><br>
+                  <%= f.text_field :task_name, class: "form-control submit-form task_name", placeholder: "Enter New Task - maximum 25 letters"%>
+                </div>
+                <div class="field">
+                  <%= f.label :task_description, "Task Description" %><br>
+                  <%= f.text_field :task_description, class: "form-control submit-form task_description",  placeholder: "Add Task Description"%>
+                </div>
+                <div class="field">
+                  <%= f.label :category, "Category" %><br>
+                  <%= f.text_field :category, class: "form-control submit-form task_category", value: "", placeholder: "Choose category - must be presence"%>
+                </div>
+                <div class="field">
+                  <%= f.label :task_due, "Task Due" %><br>
+                  <%= date_select :task, :task_due, order: [:day, :month, :year] %><br>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <%= f.submit "Add Task", class:"btn-success btn submit-btn" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <!-- End of Add form Modal -->

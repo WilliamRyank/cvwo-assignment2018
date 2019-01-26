@@ -1,48 +1,4 @@
-
-<h1 class="heading">List of all Tasks</h1>
-
-
-<div class="container">
-  <div class="container-box">
-    <div class="row">
-      <div class="col-xs-2 col-xs-offset-1">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#mynewpost">
-          Add Task
-        </button>
-        <%= form_for @task do |f| %>
-        <div class="modal fade" id="mynewpost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Add New Task</h3>
-              </div>
-              <div class="modal-body">
-                <div class="field">
-                  <%= f.label :task_name, "Task Name" %><br>
-                  <%= f.text_field :task_name, class: "form-control submit-form task_name", placeholder: "Enter New Task - maximum 25 letters"%>
-                </div>
-                <div class="field">
-                  <%= f.label :task_description, "Task Description" %><br>
-                  <%= f.text_field :task_description, class: "form-control submit-form task_description",  placeholder: "Add Task Description"%>
-                </div>
-                <div class="field">
-                  <%= f.label :category, "Category" %><br>
-                  <%= f.text_field :category, class: "form-control submit-form task_category", value: "", placeholder: "Choose category - must be presence"%>
-                </div>
-                <div class="field">
-                  <%= f.label :task_due, "Task Due" %><br>
-                  <%= date_select :task, :task_due %><br>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <%= f.submit "Add Task", class:"btn-success btn submit-btn" %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% end %>
-      </div>
+      <%= render "newform" %>
       <div class="col-xs-3 col-xs-offset-1" id="sort-btn">
         <%= link_to "Sort By Date", tasks_date_path, class: "btn btn-warning" %>
       </div>
@@ -55,7 +11,6 @@
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1">
         <hr>
-        <small>Click on the task name to see more details</small>
       </div>
     </div>
     <% @categories.each do |cat| %>
@@ -70,51 +25,74 @@
           <% if task.category_id == cat.id %>
           <li>
             <div class="row" id="task_<%= task.id %>">
-              <div class="col-sm-4 col-sm-offset-1">
-                <%= link_to "#{task.task_name}", task_path(task), class: "task" %>
+              <div class="col-sm-3 col-sm-offset-1">
+                <h4><%= task.task_name %></h4>
               </div>
-              <div class="col-sm-2 ">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-task">
-                  Edit Task
-                </button>
+              <!-- More info Modal -->
+              <div class="col-sm-2">
+                <ul class="hidden-ul">
+                  <li class="task-name hidden-data"><%= task.task_name %></li>
+                  <li class="task-description hidden-data"><%= task.task_description %></li>
+                  <li class="task-category hidden-data"><%= task.category.name %></li>
+                  <button type="button" class="btn btn-secondary btn-block info-btn" data-toggle="modal" data-target="#infoModal">
+                    More Info
+                  </button>
+                </ul>
+                <%= render "info" %>
+              </div>
+              <!-- End of More Info Modal -->
+              <div class="col-sm-1 ">
+                <ul class="hidden-ul">
+                  <li class="task-name hidden-data"><%= task.task_name %></li>
+                  <li class="task-description hidden-data"><%= task.task_description %></li>
+                  <li class="task-category hidden-data"><%= task.category.name %></li>
+                  <li class="task-dueday hidden-data"><%= task.task_due.day %></li>
+                  <li class="task-duemonth hidden-data"><%= task.task_due.month %></li>
+                  <li class="task-dueyear hidden-data"><%= task.task_due.year %></li>
+                  <button type="button" class="btn btn-primary btn-block edit-btn" data-toggle="modal" data-target="#editModal<%= task.id %>">
+                    Edit
+                  </button>
+                </ul>
+                <!-- Edit form Modal -->
                 <%= form_for task do |f| %>
-                <div class="modal fade" id="edit-task" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h3 class="modal-title" id="exampleModalLabel">Edit Task</h3>
-                      </div>
-                      <div class="modal-body">
-                        <div class="field">
-                          <%= f.label :task_name, "Task Name" %><br>
-                          <%= f.text_field :task_name, class: "form-control submit-form task_name", placeholder: "Enter New Task"%>
+                  <div class="modal fade" id="editModal<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title" id="exampleModalLabel">Edit Task</h3>
                         </div>
-                        <div class="field">
-                          <%= f.label :task_description, "Task Description" %><br>
-                          <%= f.text_field :task_description,value: "#{task.task_description}", class: "form-control submit-form task_description",  placeholder: "Add Task Description"%>
+                        <div class="modal-body">
+                          <div class="field">
+                            <%= f.label :task_name, "Task Name" %><br>
+                            <%= f.text_field :task_name, class: "form-control submit-form"%>
+                          </div>
+                          <div class="field">
+                            <%= f.label :task_description, "Task Description" %><br>
+                            <%= f.text_field :task_description,  class: "form-control submit-form",  placeholder: "Add Task Description"%>
+                          </div>
+                          <div class="field">
+                            <%= f.label :category, "Category" %><br>
+                            <%= f.text_field :category, class: "form-control submit-form"%>
+                          </div>
+                          <div class="field">
+                            <%= f.label :task_due, "Task Due" %><br>
+                            <%= date_select :task, :task_due, order: [:day, :month, :year] %><br>
+                          </div>
                         </div>
-                        <div class="field">
-                          <%= f.label :category, "Category" %><br>
-                          <%= f.text_field :category, class: "form-control submit-form task_category", value: "#{task.category.name}", placeholder: "Choose category"%>
+                        <div class="modal-footer">
+                          <button type="button", class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <%= f.submit "Edit", class:"btn-primary btn" %>
                         </div>
-                        <div class="field">
-                          <%= f.label :task_due, "Task Due" %><br>
-                          <%= date_select :task, :task_due, default: { day: task.task_due.day, month: task.task_due.month, year: task.task_due.year } %><br>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <%= f.submit "Edit Task", class:"btn-primary btn" %>
                       </div>
                     </div>
                   </div>
-                </div>
                 <% end %>
               </div>
-              <div class="col-sm-2">
-                <%= link_to "Delete", task_path(task),remote: true, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger " %>
+              <!-- End of Edit form Modal -->
+              <div class="col-sm-1">
+                <%= link_to "Delete", task_path(task),remote: true, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger btn-block" %>
               </div>
-              <div class="col-sm-3 ">
+              <div class="col-sm-3 col-sm-offset-1">
                 <%= task.task_due.strftime("%B %d, %Y") %>
               </div>
             </div>
