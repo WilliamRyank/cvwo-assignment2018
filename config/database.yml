@@ -1,26 +1,28 @@
-development:
-  adapter: postgresql
-  encoding: utf8
-  database: cvwo_development
-  pool: 5
-  username:
-  password:
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
 
-test: &TEST
-  adapter: postgresql
-  encoding: utf8
-  database: cvwo_test
-  pool: 5
-  username:
-  password:
+development:
+  <<: *default
+  database: db/development.sqlite3
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: db/test.sqlite3
 
 production:
   adapter: postgresql
-  encoding: utf8
+  encoding: unicode
   database: cvwo_production
   pool: 5
-  username:
-  password:
-
-cucumber:
-  <<: *TEST
+  timeout: 5000
