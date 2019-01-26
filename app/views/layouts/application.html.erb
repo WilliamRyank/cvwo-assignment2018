@@ -14,6 +14,7 @@
     <%= yield %>
     <script type="text/javascript">
         $(".new-btn").on("click", function(){
+          $('#newModal').modal('show');
           $(".task_name").val("");
           $(".task_description").val("");
           $(".task_category").val("");
