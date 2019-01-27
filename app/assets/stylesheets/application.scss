@@ -1,19 +1,10 @@
 .row {
   margin: 15px 20px ;
 }
-.glyphicon-ok {
-  border: 1px solid;
-  padding: 5px;
-  border-radius: 50px;
-  font-weight: 100;
-  margin-right: 10px;
-  opacity: 0.4;
+
+body, html{
+  height: 100%
 }
-
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
-
 body{
   background: url("https://hdqwalls.com/download/dark-night-landscape-artistic-7v-2048x1152.jpg") no-repeat center center fixed;
   color: black;
